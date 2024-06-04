@@ -148,6 +148,7 @@
                 </div>               
             </div>                   
         </div>
+
     </section>
     @if (session('success'))
     <div id="modelConfirm" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-40 overflow-y-auto h-full w-full px-4 ">
