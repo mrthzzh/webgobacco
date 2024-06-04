@@ -108,6 +108,8 @@
                                                     <td class="flex justify-center py-4 pr-2 ">
                                                         <img src="../storage/gmb_tembakaus/{{ $sertifikasi->gmb_tembakau }}">
                                                     </td>
+                                                    
+
                                                     <td class="py-4 pr-2">{{ $sertifikasi->surat_izin_usaha }}</td>
                                                     <td class="py-4 pr-2">{{ $sertifikasi->jenis_pengujian }}</td>
                                                         
@@ -115,7 +117,7 @@
                                                         <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">{{ $sertifikasi->status_uji }}</span>
                                                     </td>
                                                     <td class="py-1 px-2">
-                                                        <a href="#" class="cursor-pointer rounded-full bg-light-button px-2 py-1 text-xs font-normal text-light-putih hover:bg-opacity-80">Lihat Detail                               
+                                                        <a href="{{ route('sertifikasi.show', ['id_sertifikasi' => $sertifikasi-> id_sertifikasi]) }}" class="cursor-pointer rounded-full bg-light-button px-2 py-1 text-xs font-normal text-light-putih hover:bg-opacity-80">Lihat Detail                               
                                                         </a>
                                                         @if (isset($sertifikasi->hasil_pengujian))
                                                             <a
@@ -133,7 +135,7 @@
                                                             </a>
                                                         @endif
                                                     </td>
-                                                    <td class="py-4 pr-2 border-b border-gray-200">{{ $sertifikasi->hasil_pengujian }}</td>
+                                                    <td class="py-4 pr-2 border-b border-gray-200"><a href="/pemerintah/download/hasil_pengujians/{{ $sertifikasi->hasil_pengujian }}"> {{ $sertifikasi->hasil_pengujian }}</td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>

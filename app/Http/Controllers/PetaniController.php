@@ -23,9 +23,13 @@ class PetaniController extends Controller
     public function register()
     {
         $id = Session::get('id');
+        $jenis_kelamin = jenisKelamin::all();
+        $kecamatan = Kecamatan::all();
         if (isset($id)) return redirect('/petani/akun');
         return view('petani.register', [
-            'title' => 'Petani | Register'
+            'title' => 'Petani | Register',
+            'jenis_kelamin' => $jenis_kelamin,
+            'kecamatan' => $kecamatan,
         ]);
     }
     public function postRegister(Request $request): RedirectResponse
@@ -41,14 +45,22 @@ class PetaniController extends Controller
             'telp_petani' => 'required',
             'noktp_petani' => 'required',
         ]);
-        $kecamatan = Kecamatan::query()->where('kecamatan', $validated['id_kecamatan'])->first();
-        $jenis_kelamin = JenisKelamin::query()->where('jenis_kelamin', $validated['id_jenis_kelamin'])->first();
 
-        $validated['id_kecamatan'] = $kecamatan->id_kecamatan;
-        $validated['id_jenis_kelamin'] = $jenis_kelamin->id_jenis_kelamin;
+        $kecamatan = Kecamatan::query()->find($validated['id_kecamatan']);
+        $jenis_kelamin = JenisKelamin::query()->find($validated['id_jenis_kelamin']);
+
+        if (!$kecamatan || !$jenis_kelamin) {
+            return redirect('/register')->withErrors(['error' => 'Invalid Kecamatan or Jenis Kelamin']);
+        }
+
+        $validated['kecamatan'] = $kecamatan->id_kecamatan;
+        $validated['jenis_kelamin'] = $jenis_kelamin->id_jenis_kelamin;
+
         PetaniTembakau::create($validated);
-        return redirect('/register')->with('success', 'Data akun berhasil dibuat!');
+
+        return redirect('/login')->with('success', 'Data akun berhasil dibuat!');
     }
+
     public function melihatDataAkun(Request $request)
     {
         $id_petani = $request->session()->get('id', null);
@@ -214,7 +226,7 @@ class PetaniController extends Controller
             return view('petani.sertifikasi.edit', [
                 'title' => 'Petani | Edit Pengajuan',
                 'sertifikasi' => $sertifikasi,
-                'jenis_pengujians' => $jenis_pengujians
+                'jenis_pengujians' => $jenis_pengujians,
             ]);
         } else {
             return redirect('/')->with('failed', 'Silahkan login terlebih dahulu!');
@@ -247,6 +259,34 @@ class PetaniController extends Controller
         SertifikasiProduk::query()->where('id_sertifikasi', $request->id_sertifikasi)->delete();
         return redirect('/petani/sertifikasi')->with('deleted', '-');
     }
+
+    public function melihatDetailPengajuanSertifikasi($id_sertifikasi)
+    {
+        $sertifikasi = SertifikasiProduk::query()
+            ->select('sertifikasi_produks.*', 'jenis_pengujians.*', 'jenis_tembakaus.*', 'petani_tembakaus.*', 'kecamatans.*')
+            ->where('sertifikasi_produks.id_sertifikasi', $id_sertifikasi)
+            ->join('jenis_tembakaus', 'jenis_tembakaus.id_jenis_tembakau', '=', 'sertifikasi_produks.id_jenis_tembakau')
+            ->join('jenis_pengujians', 'jenis_pengujians.id_pengujian', '=', 'sertifikasi_produks.id_pengujian')
+            ->join('petani_tembakaus', 'petani_tembakaus.id_petani', '=', 'sertifikasi_produks.id_petani')
+            ->join('kecamatans', 'kecamatans.id_kecamatan', '=', 'petani_tembakaus.id_kecamatan')
+            ->get();
+    
+        $jenis_pengujians = JenisPengujian::all(); // Fetch all jenis_pengujians
+    
+        if ($sertifikasi->isNotEmpty()) {
+            return view('petani.sertifikasi.view', [
+                'title' => 'Pemerintah | Pengajuan Sertifikasi',
+                'sertifikasi' => $sertifikasi,
+                'jenis_pengujians' => $jenis_pengujians, // Pass jenis_pengujians to the view
+            ]);
+        } else {
+            return redirect('/')->with('failed', 'Silahkan login terlebih dahulu!');
+        }
+    }
+    
+
+    
+
     public function downloadFile(string $folder_name, string $file_name)
     {
         return Storage::disk('public')->download($folder_name . '/' . $file_name);
@@ -257,8 +297,8 @@ class PetaniController extends Controller
         $petani = PetaniTembakau::find($id_petani);
         return view('petani.edukasi.edukasi', [
             'title' => 'Edukasi Petani',
-            'petani' => $petani 
-            
+            'petani' => $petani
+
         ]);
     }
     public function melihatTanamTembakau(Request $request)
@@ -268,7 +308,7 @@ class PetaniController extends Controller
         $edukasi = Edukasi::where('id_topik', 1)->orderBy('id_edukasi', 'desc')->get();
         return view('petani.edukasi.tanamtembakau', [
             'edukasis' => $edukasi,
-            'petani' => $petani ,
+            'petani' => $petani,
             'title' => 'Data Edukasi'
         ]);
     }
@@ -285,9 +325,9 @@ class PetaniController extends Controller
 
         return view('petani.dashboard', [
             'title' => 'Dashboard',
-            'petani' => $petani 
+            'petani' => $petani
         ]);
-    }   
+    }
     public function melihatEksporTembakau(Request $request)
     {
         $id_petani = $request->session()->get('id', null);
@@ -296,7 +336,7 @@ class PetaniController extends Controller
 
         return view('petani.edukasi.eksportembakau', [
             'edukasis' => $edukasi,
-            'petani' => $petani ,
+            'petani' => $petani,
             'title' => 'Data Edukasi'
         ]);
     }

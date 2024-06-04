@@ -107,7 +107,7 @@
                                                             </span>
                                                         </a>
                                                     </td>
-                                                    <td class="py-4 pr-2 border-b border-gray-200">{{ $sertifikasi->hasil_pengujian }}</td>
+                                                    <td class="py-4 pr-2 border-b border-gray-200"><a href="/pemerintah/download/hasil_pengujians/{{ $sertifikasi->hasil_pengujian }}"> {{ $sertifikasi->hasil_pengujian }}</td>
                                                 </tr>
                                             @endforeach
 
