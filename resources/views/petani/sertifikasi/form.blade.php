@@ -159,7 +159,11 @@
                                 <div class="row-span-1">
                                     <label for="nama" class="text-base font-medium text-light-secondary block mb-2 ">Jenis
                                         Tembakau</label>
+<<<<<<< HEAD
                                     <input  type="hidden" name="id_jenis_tembakau" id="idJenisTemb">
+=======
+                                    <input  name="id_jenis_tembakau" id="idJenisTemb">
+>>>>>>> 8707987e2becf56ea640137165a11ec5d9a365db
                                     <div class="dropdown w-full">
                                         <div onclick="myFunction()" id="drop1" class="dropbtn shadow-sm py-[1.4rem] bg-light-fill w-full  bg-opacity-50 text-light-secondary rounded-lg block focus:outline-slate-400"></div>
                                         <div id="myDropdown" class="dropdown-content cursor-pointer">

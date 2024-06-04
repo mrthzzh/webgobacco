@@ -24,12 +24,18 @@ class PetaniController extends Controller
     {
         $id = Session::get('id');
         $jenis_kelamin = jenisKelamin::all();
+<<<<<<< HEAD
         $kecamatan = Kecamatan::all();
+=======
+>>>>>>> 8707987e2becf56ea640137165a11ec5d9a365db
         if (isset($id)) return redirect('/petani/akun');
         return view('petani.register', [
             'title' => 'Petani | Register',
             'jenis_kelamin' => $jenis_kelamin,
+<<<<<<< HEAD
             'kecamatan' => $kecamatan,
+=======
+>>>>>>> 8707987e2becf56ea640137165a11ec5d9a365db
         ]);
     }
     public function postRegister(Request $request): RedirectResponse

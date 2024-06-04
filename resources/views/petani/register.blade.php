@@ -147,6 +147,7 @@
                         </div>
 
                         <div class="col-span-6 sm:col-span-3">
+<<<<<<< HEAD
                             <label for="jeniskelamin" class="text-sm font-medium text-light-secondary opacity-70 block mb-2">Jenis Kelamin</label>
                             <input type="hidden" name="id_jenis_kelamin" id="jenis-kelamin">
                             <div class="dropdown w-full">
@@ -158,6 +159,19 @@
                                 </div>
                             </div>
                         </div>
+=======
+                            <label for="jenis-kelamin" class="text-sm font-medium text-light-secondary opacity-70 block mb-2">Jenis Kelamin</label>
+                            <input  name="jenis_kelamin" id="nama">
+                                    <div class="dropdown w-full">
+                                        <div onclick="myFunction2()" id="drop2" class="dropbtn shadow-sm py-[1.4rem] bg-light-fill w-full  bg-opacity-50 text-light-secondary rounded-lg block focus:outline-slate-400"></div>
+                                        <div id="myDropdown2" class="dropdown-content cursor-pointer">
+                                            @foreach ($jenis_kelamin as $jenis_kelamin)
+                                                <p data-id="{{ $jenis_kelamin->jenis_kelamin }}" class="jenisPengujian">{{ $jenis_kelamin->jenis_kelamin }}</p>
+                                            @endforeach
+                                          </div>
+                                    </div>
+                        </div>                        
+>>>>>>> 8707987e2becf56ea640137165a11ec5d9a365db
                     </div>
                 </div>
 
@@ -197,6 +211,7 @@
     @endif
 
     <script>
+<<<<<<< HEAD
         window.onclick = function(event) {
             if (!event.target.matches('.dropbtn')) {
                 var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -267,6 +282,11 @@
             }
         });
         
+=======
+function myFunction2() {
+        document.getElementById("myDropdown2").classList.toggle("show");
+    }
+>>>>>>> 8707987e2becf56ea640137165a11ec5d9a365db
     </script>
 </body>
 

@@ -138,7 +138,11 @@
 </style>
 
 <body>
+<<<<<<< HEAD
     <header>Menambahkan data edukasi tanaman tembakau</header>
+=======
+    <header>Menambahkan data informasi tanam tembakau</header>
+>>>>>>> 8707987e2becf56ea640137165a11ec5d9a365db
     <section class="font-poppins">
     <div>
                 @foreach ($edukasis as $edukasi)
