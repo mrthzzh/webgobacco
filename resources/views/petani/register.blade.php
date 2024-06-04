@@ -91,7 +91,15 @@
 
                         <div class="col-span-6 sm:col-span-3">
                             <label for="jenis-kelamin" class="text-sm font-medium text-light-secondary opacity-70 block mb-2">Jenis Kelamin</label>
-                            <input type="text" name="id_jenis_kelamin" id="jenis-kelamin" class="shadow-sm bg-light-fill opacity-50 text-light-hitam rounded-lg block w-full p-2.5" >
+                            <input  name="jenis_kelamin" id="nama">
+                                    <div class="dropdown w-full">
+                                        <div onclick="myFunction2()" id="drop2" class="dropbtn shadow-sm py-[1.4rem] bg-light-fill w-full  bg-opacity-50 text-light-secondary rounded-lg block focus:outline-slate-400"></div>
+                                        <div id="myDropdown2" class="dropdown-content cursor-pointer">
+                                            @foreach ($jenis_kelamin as $jenis_kelamin)
+                                                <p data-id="{{ $jenis_kelamin->jenis_kelamin }}" class="jenisPengujian">{{ $jenis_kelamin->jenis_kelamin }}</p>
+                                            @endforeach
+                                          </div>
+                                    </div>
                         </div>                        
                     </div>
                 </div>
@@ -136,10 +144,8 @@
     @endif
 
     <script>
-    window.closeModal = function(modalId) {
-    document.getElementById(modalId).style.display = 'none'
-    document.getElementsByTagName('body')[0].classList.remove('overflow-y-hidden')
-    window.location.href = "/login";
+function myFunction2() {
+        document.getElementById("myDropdown2").classList.toggle("show");
     }
     </script>
 </body>

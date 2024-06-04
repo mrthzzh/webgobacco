@@ -23,9 +23,11 @@ class PetaniController extends Controller
     public function register()
     {
         $id = Session::get('id');
+        $jenis_kelamin = jenisKelamin::all();
         if (isset($id)) return redirect('/petani/akun');
         return view('petani.register', [
-            'title' => 'Petani | Register'
+            'title' => 'Petani | Register',
+            'jenis_kelamin' => $jenis_kelamin,
         ]);
     }
     public function postRegister(Request $request): RedirectResponse

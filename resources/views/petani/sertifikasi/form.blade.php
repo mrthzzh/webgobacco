@@ -108,7 +108,7 @@
                                         class="shadow-sm bg-light-fill bg-opacity-50 text-light-secondary rounded-lg block w-full p-2.5 focus:outline-slate-400"
                                         >
                                 </div>
-                                <div class=""">
+                                <div class="">
                                     <label for=" email" class="text-base font-medium text-light-secondary block mb-2">
                                     Email</label>
                                     <input disabled type="email" value="{{ $petani->email_petani }}" name="email_petani" id="email"
@@ -137,7 +137,7 @@
                                     </div>
                                     <div class="">
                                         <label for=" id_kecamatan" class="text-base font-medium text-light-secondary block mb-2">Kecamatan</label>
-                                        <input disabled type="text" value="{{ $kecamatan->kecamatan }}" name="id_kecamatan" id="id_kecamatan"
+                                        <input readonly type="text" value="{{ $kecamatan->kecamatan }}" name="id_kecamatan" id="id_kecamatan"
                                             class="shadow-sm bg-light-fill bg-opacity-50 text-light-secondary rounded-lg block w-full p-2.5 focus:outline-slate-400"
                                             >
                                     </div>
@@ -159,7 +159,7 @@
                                 <div class="row-span-1">
                                     <label for="nama" class="text-base font-medium text-light-secondary block mb-2 ">Jenis
                                         Tembakau</label>
-                                    <input type="hidden" name="id_jenis_tembakau" id="idJenisTemb">
+                                    <input  name="id_jenis_tembakau" id="idJenisTemb">
                                     <div class="dropdown w-full">
                                         <div onclick="myFunction()" id="drop1" class="dropbtn shadow-sm py-[1.4rem] bg-light-fill w-full  bg-opacity-50 text-light-secondary rounded-lg block focus:outline-slate-400"></div>
                                         <div id="myDropdown" class="dropdown-content cursor-pointer">
